@@ -1,11 +1,13 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
 const Manager = require('./lib/manager-class');
 const Engineer = require('./lib/engineer-class');
 const Intern = require('./lib/intern-class');
+const teamSorter = require('./src/card-template');
 
 
-const membersArray = [];
+const managerArray = [];
+const engineerArray = [];
+const internArray = [];
 
 const internQuestions = [
     {
@@ -89,34 +91,39 @@ const memberInfo = questions => {
         )
         .then(response => {
             console.log('\n')
+            //console.log(response)
 
-            if (response.managerOfficeNumber) {
+            // If statements for saving and creating members information objects
+            if (response.managerOfficeNumber || response.managerOfficeNumber == '') {
                 //Takes the entered names and uppercases the first letters.
                 const nameLower = response.memberName.toLowerCase();
                 const nameArray = nameLower.split(' ');
-                console.log(nameArray)
                 let correctName = '';
                 for (index = 0; index < nameArray.length; index++) {
                     let properName = nameArray[index].charAt(0).toUpperCase() + nameArray[index].slice(1);
                     correctName = correctName.concat(`${properName} `);
-                    console.log(properName + ' middle log');
                 };
 
-                console.log(correctName + 'last log');
-
-                const manager = new Manager(correctName, 1, response.memberEmail, response.managerOfficeNumber);
+                // Creates the manager object
+                const manager = new Manager(correctName, '1', response.memberEmail, response.managerOfficeNumber);
 
                 console.log(manager);
+                managerArray.push(response);
+            } else if (response.memberGithubUsername || response.memberGithubUsername == '') {
+                engineerArray.push(response);
+            } else if (response.memberSchool || response.memberSchool == '') {
+                internArray.push(response);
             }
 
+
+            // if statements to restart memberinfo prompt or finish building team
             if (response.createMember === "Add Engineer") {
-                membersArray.push(response);
                 memberInfo(engineerQuestions);
             } else if (response.createMember === "Add Intern") {
-                membersArray.push(response);
                 memberInfo(internQuestions);
             } else if (response.createMember === "Finish building team") {
                 console.log(`Team is Finished!`)
+                teamSorter(managerArray, engineerArray, internArray);
             }
         })
 }
