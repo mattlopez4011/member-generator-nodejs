@@ -1,11 +1,16 @@
-//function to recieve arrays of information objects and sort them
+const generateHTML = require('./generateHTML');
+
+//function to receive arrays of information objects and sort them
 const teamSorter = (managerArray, engineerArray, internArray) => {
+    console.log('engineerArray: ', engineerArray)
     sortMembers(managerArray);
     sortMembers(engineerArray);
     sortMembers(internArray);
 
-    
 
+    console.log('after engineerArray: ', engineerArray)
+    console.log('after internArray: ', internArray)
+    generateHTML(managerArray, engineerArray, internArray);
 }
 
 
@@ -22,6 +27,8 @@ const sortMembers = array => {
         }
         return 0;
     });
+
+    return array
 }
 
 

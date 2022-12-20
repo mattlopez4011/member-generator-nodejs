@@ -17,7 +17,7 @@ const internQuestions = [
     },
     {
         type: 'input',
-        message: "Please enter the intern's email adress",
+        message: "Please enter the intern's email address",
         name: 'memberEmail',
     },
     {
@@ -27,7 +27,7 @@ const internQuestions = [
     },
     {
         type: 'list',
-        message: 'Would you like to add another team meaber?',
+        message: 'Would you like to add another team member?',
         name: 'createMember',
         choices: ['Add Engineer', 'Add Intern', 'Finish building team'],
     },
@@ -41,7 +41,7 @@ const engineerQuestions = [
     },
     {
         type: 'input',
-        message: "Please enter the engineer's email adress",
+        message: "Please enter the engineer's email address",
         name: 'memberEmail',
     },
     {
@@ -51,7 +51,7 @@ const engineerQuestions = [
     },
     {
         type: 'list',
-        message: 'Would you like to add another team meaber?',
+        message: 'Would you like to add another team member?',
         name: 'createMember',
         choices: ['Add Engineer', 'Add Intern', 'Finish building team'],
     },
@@ -65,7 +65,7 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        message: 'Please enter your email adress',
+        message: 'Please enter your email address',
         name: 'memberEmail',
     },
     {
@@ -75,7 +75,7 @@ const managerQuestions = [
     },
     {
         type: 'list',
-        message: 'Would you like to add another team meaber?',
+        message: 'Would you like to add another team member?',
         name: 'createMember',
         choices: ['Add Engineer', 'Add Intern', 'Finish building team'],
     },
@@ -95,7 +95,7 @@ const memberInfo = questions => {
 
             // If statements for saving and creating members information objects
             if (response.managerOfficeNumber || response.managerOfficeNumber == '') {
-                //Takes the entered names and uppercases the first letters.
+                //Takes the entered names and uppercase the first letters.
                 const nameLower = response.memberName.toLowerCase();
                 const nameArray = nameLower.split(' ');
                 let correctName = '';
@@ -116,7 +116,7 @@ const memberInfo = questions => {
             }
 
 
-            // if statements to restart memberinfo prompt or finish building team
+            // if statements to restart member info prompt or finish building team
             if (response.createMember === "Add Engineer") {
                 memberInfo(engineerQuestions);
             } else if (response.createMember === "Add Intern") {
